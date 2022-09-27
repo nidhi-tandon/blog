@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
+
+.navbar a {
+  margin: 24px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.navbar a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

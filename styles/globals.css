@@ -1,26 +1,33 @@
-/*
-Color theme:
-primary: 222831
-secondary:EEEEEE
-title: 00ADB5
-other: 393E46
-*/
+@font-face {
+  font-family: "Basier";
+  src: url("../fonts/BasierCircle-Regular.woff");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Basier Bold";
+  src: url("../fonts/BasierCircle-Bold.otf");
+  font-weight: bold;
+}
 
 html,
 body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-color: #222831;
-    color: #EEEEEE;
+  margin: 0;
+  font-family: "Basier", serif;
+  background-color: #181c25;
+  color: #eeeeee;
+  padding: 0 2rem;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+/*strong {*/
+/*    font-family: 'Basier Bold', serif;*/
+/*}*/

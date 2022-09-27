@@ -1,39 +1,76 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Image from "next/image";
+import profile from "../public/profile.jpeg";
+import Navbar from "../components/Navbar";
+import Twitter from "../icons/twitter";
+import LinkedIn from "../icons/linkedIn";
+import Github from "../icons/github";
+import MailTo from "../icons/mail";
 
 export default function Home() {
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Nidhi Tandon</title>
-                <meta name="description" content="Nidhi's blog"/>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
+  return (
+    <div>
+      <Head>
+        <title>Nidhi Tandon</title>
+        <meta name="description" content="Nidhi's blog" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Navbar />
 
-            <main className={styles.main}>
-                <h1 className={styles.title}>
-                    Nidhi Tandon
-                </h1>
-
-                <p className={styles.description}>
-                    <br/>Health enthusiast and wellness vocalist
-                    <br/>Loves music and know a few chords on 🎸
-                    <br/>Studying stoicism and spirituality
-                    <br/>Dog lover
-                    <br/>Engineer
-                </p>
-
-                {/*<a>Link to blogs</a>*/}
-
-                {/*<div className={styles.grid}>*/}
-                {/*    <a href="/blog" className={styles.card}>*/}
-                {/*        <h2>Are you a Product Engineer?</h2>*/}
-                {/*        <p>Find in-depth about what to expect when joining the role of a Product Engineer</p>*/}
-                {/*    </a>*/}
-                {/*</div>*/}
-            </main>
+      <main className={styles.main}>
+        <Image
+          src={profile}
+          alt="Picture of the author"
+          width={300}
+          height={300}
+          objectFit={"cover"}
+          style={{
+            borderRadius: "50%",
+          }}
+        />
+        <h1 className={styles.title}>Nidhi Tandon</h1>
+        <p className={styles.description}>
+          <br />
+          Health enthusiast and wellness vocalist
+          <br />
+          Studying stoicism and spirituality
+          <br />
+          Loves music and plays guitar
+          <br />
+          Frontend Engineer by profession
+        </p>
+        <div className={styles.iconsContainer}>
+          <a
+            href="https://twitter.com/nidhitandon08"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Twitter />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/nidhi-tandon-6ba79b78/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedIn />
+          </a>
+          <a
+            href="https://github.com/nidhi-tandon"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Github />
+          </a>
+          <a
+            href="mailto:nidhitandon08@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MailTo />
+          </a>
         </div>
-    )
+      </main>
+    </div>
+  );
 }
-
-

@@ -1,0 +1,282 @@
+import styles from "../../../styles/Blog.module.css";
+
+# What does it mean to be a Product Engineer?
+
+You must have heard about Product Engineering teams in some companies, especially mid-sized startups, but have you ever wondered what it would be like to work in those teams as a frontend engineer?
+
+This article talks about what is it like in the life of a product engineer in general and more specifically a growth engineer.
+
+## What is a Product engineering team?
+
+The team which works on solving the product-related needs of the company is called the **Product Engineering team.**
+
+Product Engineering is a very vast term, and it can be divided into smaller terms like Acquisition/Growth, Activations, Onboarding, etc. and these terms/businesses lead to form respective teams handling these responsibilities.
+
+## Why a Product Engineering team?
+
+Bringing in more users to use the product is every company’s goal because it drives revenue. The meaning of a user varies from company to company. For SaaS companies like AWS, the developers are the users and for product companies, like Razorpay, end customers are the users. Let’s take the example of Razorpay. For Razorpay’s payment gateway team, the [merchants](https://en.wikipedia.org/wiki/Merchant) who opt for Razorpay’s Payment Gateway are the users. So, the company tries to bring in more users by solving their payment problems, and providing a better payment solution is company’s one of many products.
+
+So most companies have a dedicated team to strategize on how to bring more revenue. These teams include sales, marketing, design, product, and engineering folks. These folks do thorough market research, look at the competitors and bring in new ideas to acquire more users.
+
+## How Product Engineering?
+
+Now we know the what and why, let’s look at the how.
+
+Let’s take an example of the **Acquisition/Growth Engineering team** which would be a sub-team of the Product Engineering team. This team’s goal would be to bring in more users to the platform and it would be achieved by having more users sign up on their platform. This team would be helping in acquiring more users (as the name suggests) and help grow the business faster.
+
+For this team, users are very important. So it takes care of everything about the user and their journey.
+
+Let's take an example of Razorpay to understand the user journey.
+
+In the case of Razorpay, the user’s journey begins by searching the payment gateway in a browser. An interested user would click on this link and land on their [website](https://razorpay.com).
+
+<img src="/search-result.png" alt="Search Result" className={styles.mdxImage} />
+
+So by showing Razorpay at the top in the search recommendations and by having the relevant content on the website, one can target the right and more quality users. A lot of marketing, sales, and business teams’ brains are involved in keeping Razorpay at the top in the search. Also, apart from search engines, users can come via advertisements and marketing campaigns. Generally, all this is handled by a separate charter involving engineering, product, and marketing
+
+Once a user finds Razorpay via a search engine or advertisement etc. and lands on the brand [website](https://razorpay.com), we can proudly say that we have reached the first step to convince the user to buy our product, and when they buy our product, they will be converted to our customer. In our words, we could say [conversion](https://support.google.com/analytics/answer/6086209?hl=en) is done for the user.
+
+#### \*(The actual meaning of the term conversion varies from business to business. In some cases, when the user starts paying for the product, it could be called a conversion. To keep it simple, let’s assume when the user signs up, we will call it a **_conversion_** )\*
+
+<img
+  src="/user-funnel.png"
+  alt="User funnel"
+  className={styles.mdxImage}
+  style={{ maxWidth: "500px", height: "300px" }}
+/>
+
+The team which works on handling this entire user’s journey from taking the user to the website and signing up the user and handling the conversion is called the **Acquisition/Growth Engineering team.** In simple words, this team helps in acquiring more users.
+
+Now we know the problem statement of the **Acquisition/Growth Engineering team,** let’s see how they solve it.
+
+Let’s say you join one such team and your team’s target is to increase the signup conversion. So a Product Manager comes up with a suggestion that showing a banner that says `Sign Up Now and get exciting offers` on the homepage can bring in more users and your task is to implement this end to end.
+
+To drive conversion, first, you have to understand the kind of users the company wants to target and the platforms from which those users are coming from.
+
+There could be multiple ways a user can land on the company’s website. Let's take an example of Razorpay:
+
+- The user could be coming from [advertisements](https://ads.google.com/intl/en_in/home/) and [campaigns](https://support.google.com/google-ads/answer/6304?hl=en) running on LinkedIn, Facebook, Twitter, or any other social platform. We will call it a **social user**.
+
+<img
+  src="/advertisement.png"
+  alt="Ad"
+  className={styles.mdxImage}
+  style={{ height: "400px" }}
+/>
+##### *(Example of an advertisement on LinkedIn. Could be called a campaign)*
+
+<img
+  src="/google-ad.png"
+  alt="Google Ad"
+  className={styles.mdxImage}
+  style={{ height: "200px" }}
+/>
+##### *(Example of an advertisement on Google search)*
+
+- A user may have heard about Razorpay and directly searched it on a search engine and landed on [razorpay.com](http://razorpay.com). We will call it an **organic user**.
+
+- A user may have the link to the [razorpay.com](https://razorpay.com) website and directly landed on the website. We will call it a **direct user**
+
+Some companies also use the term _leads_ or _candidates_ and the terms may vary from company to company.
+
+So now we know about the kind of users we want to target and let’s assume in your case, most of the users are clicking on an advertisement and landing on the website.
+
+After landing on the website, our main motive should be to quickly get the user to sign up on our platform because that's where the user creates an account and can be marked as a converted user.
+
+So let’s say we already have a button on our website which says `Sign Up Now` and when users click on it, they land on the sign-up page but we want to add a banner at the top of the page saying `Sign Up Now and get exciting offers` because the theory is it may attract more users and the sign-ups would increase.
+
+<img
+  src="/razorpay-website.png"
+  alt="Razorpay website"
+  className={styles.mdxImage}
+  style={{ height: "300px" }}
+/>
+
+<img
+  src="/razorpay-website-with-banner.png"
+  alt="Razorpay website with banner"
+  className={styles.mdxImage}
+  style={{ height: "360px" }}
+/>
+
+##### _(This is just for reference. This does not exist on razorpay.com. Well, I updated the DOM via inspect)_
+
+But we are not sure whether users would be interested to click on this banner whether users who will click on this banner and land on our signup module will actually create an account and whether our theory is correct about adding a banner and driving conversion. (Because there is a possibility that some users may find it very annoying and leave the website after seeing the banner). In order to validate our theory that the banner will actually increase signup, we will do an experiment/test with our idea. We call it an **A/B experiment**. There would be two versions of the experiments. Version A would be without the banner and version B would be with the banner. We will be writing our code in such a way that our code would support two versions of the UI (one with a banner and one without a banner). And we will set that version A would run for 90% of users and version B would run for the rest 10% (There are [tools](https://marketingplatform.google.com/about/optimize/) available to help in setting up the experiments.). By looking at the data, a winner is chosen based on which version converted more users.
+
+<div className={styles.bonus}>
+
+    > Bonus:
+
+    > Why an [A/B experiment](https://www.optimizely.com/optimization-glossary/ab-testing/)?
+
+    > - Rather than showing a new feature to all the users without validating a theory, it is always better to experiment with the idea first. In the experiment, you can show the new feature to a small set of random users and get feedback. If the users respond positively, you move forward and show the feature to all the users. We can also use the term progressive [rollout](https://www.optimizely.com/optimization-glossary/feature-rollout/#:~:text=A%20feature%20rollout%20is%20the,bundled%20together%2C%20and%20then%20monitored.) in this case.
+
+    > - A/B experiments also act as a runtime switch in cases where the users did not like the feature at all and your theory fails, and you want to revert back to the older version of your code(without this feature). You can quickly do it by changing a few things in the tool used for the A/B experiment. This would take less time than reverting your code from your CI/CD.
+
+    > You can check out [Google Optimize](https://marketingplatform.google.com/about/optimize/), [Optimizely](https://www.optimizely.com/products/intelligence/web-experimentation/), or any client-side A/B experiment tool for this.
+
+</div>
+
+Let’s come back, so we said that by looking at the data, a winner will be chosen. But wait! What data? We never talked about any data till now.
+
+Ok, brace yourself because we are going to talk about **events, metrics, funnel,** etc. and it is very crucial to your experiment.
+
+After we launch our experiment as an A/B, we would have one experiment running with two variants(one with a banner and one without a banner). When users land on any of the variants, we would need to track the user's interactions. For e.g. `user clicked the button` , `user scrolled the page`, `user landed on the pricing page`, etc. We will be sending these interactions as events to a tool. There are tons of tools to track events. For e.g, Amplitude, Google Analytics, Optimizely, etc. These tools will help us to accumulate events and create meaningful graphs out of them.
+
+<div className={styles.bonus}>
+
+    > Bonus:
+
+    > Why we need to track the user’s steps:
+
+    > - Tracking anything leads to data-driven decisions. Rather than vaguely saying that adding this feature would
+    bring in 1% conversion, it's always better to prove that hypothesis with data.
+
+    > - Tracking data at multiple steps helps to understand the user’s pain points. We can know at which point, most of
+    the users are dropping off. For e.g., Suppose your data presented that most of the users did not proceed forward
+    after the `Enter OTP` step in the Signup module. So maybe you could conclude that there is an issue with the OTP
+    flow. In this way, you have narrowed down the drop-off issue to one single problem statement.
+
+    > - Tracking data builds confidence in your system.
+
+</div>
+
+<img
+  src="/amplitude-event.png"
+  alt="Amplitude event"
+  className={styles.mdxImage}
+  style={{ height: "150px" }}
+/>
+
+##### _(Sample graph from Segment)_
+
+<img
+  src="/google-analytics-graph.png"
+  alt="Google Analytics Graph"
+  className={styles.mdxImage}
+  style={{ height: "300px" }}
+/>
+
+##### _(Sample graph from Google Analytics.)_
+
+<img
+  src="/amplitude-graph.png"
+  alt="Amplitude Graph"
+  className={styles.mdxImage}
+  style={{ height: "366px" }}
+/>
+
+##### _(Sample graph from Amplitude.)_
+
+_See, it's so easy to create meaning out of the events_
+
+When these events are accumulated in a meaningful way, it could be called a [metric](https://support.optimizely.com/hc/en-us/articles/4410289407885). We can then create our entire [funnel](https://www.optimizesmart.com/the-geek-guide-to-understanding-funnels-in-google-analytics/#0-introduction-to-funnels-in-google-analytics) through the metrics data and after accumulating the data over a period of time and visualizing it in the form of a graph, a winner can be chosen.
+
+<img
+  src="/graph.png"
+  alt="Graph"
+  className={styles.mdxImage}
+  style={{ height: "366px" }}
+/>
+
+Once a winner is chosen between variant A/B, you can decide to make your variant live to 100% audience. Hence the data helped to prove your hypothesis.
+
+<div className={styles.summary}>
+    Summary till now:
+
+    1. Understand your users and product
+    2. Experiment with your ideas by launching them as A/B
+    3. Track the progress of your ideas via metrics and graphs
+    4. Consider data as your source of truth
+    5. Declare a winner and let all users enjoy your new idea.
+
+</div>
+
+So now you know how to handle conversion in your team, let's discuss the entire journey of launching that feature.
+
+As you have seen, a lot of product and engineering brains go into the decisions about launching a feature. The usual steps involved before making a small change in high-impact projects involve:
+
+- Customer research - by the product and the design team
+- Writing a detailed Product Requirement Document - by the Product team
+- Design preparation - by the Design team
+- Creating a project plan and A/B experiment(s) - by the tech team
+- Code, Test, and write metrics, taking it live - by the tech team
+- Rollback back strategies - by the tech team
+- Impact assessment and declaring a winner - by the product and the tech team
+
+The entire lifecycle could take from a few days to month(s) depending on the feature size.
+
+<br />
+Let's talk in detail about the learning curve of a frontend engineer in this entire
+journey:
+
+If you are joining a Product team in any company, you could expect the following things in frontend:
+
+<div className={styles.nestedUl}>
+- Involvement in the user journey
+- Understanding which users to target and how
+- Suggesting ways to improve the conversion
+- More involvement with the product, marketing, and design team
+- Understanding [SEO](https://www.searchenginejournal.com/why-seo-is-important-for-business/248101/) as SEO will make your company visible and can bring in more users
+- Understanding about performance
+- Web page performance
+- API performance
+- Reducing down time
+- Understanding of the frontend ecosystem (of course because you need to code)
+- Ownership of testing and taking the feature live (involves understanding of writing test cases, deployments, CI/CD, AWS, etc.)
+- Thinking about observability and [operational excellence](https://www.iteratorshq.com/blog/ultimate-guide-to-operational-excellence/). This involves thinking in terms of
+    - Tracking of Metrics
+    - Setting up proper alerting and monitoring for your system.
+        - This alerting can be specific to API downtime, code issues, drop-offs, etc.
+        - Helpful tools: Google Analytics, Grafana, pager duty, sentry, etc.
+    - Amplitude, google analytics, etc., for monitoring user behavior.
+        - These are some of the tools one can use to achieve operational excellence but the gist is to make the **`system performant`** and detect any errors beforehand or within a fraction of time and also mitigate them to reduce impact.
+
+- Monitoring the impact of the feature
+  This could be done by using either one of the tools mentioned above or some companies have dedicated Product Analyst teams to guide them in this phase.
+
+</div>
+
+<img
+  src="/metrics-graph.png"
+  alt="Metrics Graph"
+  className={styles.mdxImage}
+  style={{ height: "366px" }}
+/>
+
+##### _(A graph to monitor feature impact. Tools like Grafana can be useful)_
+
+<div className={styles.endNote}>
+In short, if you are thinking of joining a Product Engineering team, you would become an engineer who has marketing knowledge, a product mindset, and technical efficiency. So, a product engineer is a Jack of all trades and master of Code because Code is the heart of the product 🙂
+
+You would be closely working with the product team and creating a real impact on the company’s goals.
+
+It's always better to know your team and work before joining in and I hope my blog gives you an idea of what to expect when you join as a Product Engineer.
+
+Happy coding!
+
+</div>
+
+<br />
+<br />
+<div className={styles.linkSection}>
+  Links for reference: 1. Definition of
+  [Merchant](https://en.wikipedia.org/wiki/Merchant) 2. Definition of
+  [Conversion](https://support.google.com/analytics/answer/6086209?hl=en) 3.
+  What are [Google Ads](https://ads.google.com/intl/en_in/home/)? 4. Definition
+  of [Campaign](https://ads.google.com/intl/en_in/home/) 5. What are [A/B
+  experiments](https://www.optimizely.com/optimization-glossary/ab-testing/)? 6.
+  Feature
+  [rollout](https://www.optimizely.com/optimization-glossary/feature-rollout/#:~:text=A%20feature%20rollout%20is%20the,bundled%20together%2C%20and%20then%20monitored.)
+  7. [Google optimize](https://marketingplatform.google.com/about/optimize/) 8.
+  [Optimizely](https://www.optimizely.com/products/intelligence/web-experimentation/)
+  9. [Metrics](https://support.optimizely.com/hc/en-us/articles/4410289407885)
+  in Optmizely 10. Introduction to
+  [Funnels](https://www.optimizesmart.com/the-geek-guide-to-understanding-funnels-in-google-analytics/#0-introduction-to-funnels-in-google-analytics)
+  11. Why
+  [SEO](https://www.searchenginejournal.com/why-seo-is-important-for-business/248101/)
+  is important? 12. [Operational
+  Excellence](https://www.iteratorshq.com/blog/ultimate-guide-to-operational-excellence/)
+  13. Bonus: [The Event Segmentation chart: an overview –
+  Amplitude](https://help.amplitude.com/hc/en-us/articles/360033852251-The-Event-Segmentation-chart-an-overview?wvideo=i4dgi1oxd3)
+</div>
