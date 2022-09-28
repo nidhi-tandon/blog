@@ -5,7 +5,7 @@ import HorizontalLine from "../../components/HorizontalLine";
 
 const Blogs = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <div className={styles.layout}>
         <div className={styles.link}>
@@ -19,13 +19,13 @@ const Blogs = () => {
             </div>
           </Link>
 
-          <HorizontalLine width={500} />
+          <HorizontalLine width={500} className={styles.horizontalLine}/>
 
           <br />
           <p>More coming soon! Stay tuned :)</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Blogs;

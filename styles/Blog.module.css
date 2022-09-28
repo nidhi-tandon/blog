@@ -41,11 +41,11 @@
 }
 
 .content code {
-  color: rgb(165 180 252);
+  color: #a9a;
 }
 
 .content strong {
-  color: rgb(56 189 248);
+  color: #ad728b;
 }
 
 .content blockquote {
@@ -128,11 +128,20 @@
   margin: 0;
 }
 
+.horizontalLine{
+  width: 100%;
+}
+
 @media only screen and (max-width: 460px) {
+  .horizontalLine{
+    width: 100%;
+  }
+
   .content {
     max-width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     margin-top: 0;
+    line-height: 22px;
   }
   .content h1 {
     font-size: 1.5rem;

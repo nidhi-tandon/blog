@@ -4,18 +4,12 @@
   font-weight: normal;
 }
 
-@font-face {
-  font-family: "Basier Bold";
-  src: url("../fonts/BasierCircle-Bold.otf");
-  font-weight: bold;
-}
-
 html,
 body {
   margin: 0;
   font-family: "Basier", serif;
   background-color: #181c25;
-  color: #eeeeee;
+  color: #d5d0d0;
   padding: 0 2rem;
 }
 
