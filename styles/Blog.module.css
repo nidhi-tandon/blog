@@ -145,10 +145,11 @@
   }
   .content h1 {
     font-size: 1.5rem;
-    line-height: 32px;
+    line-height: 30px;
   }
   .content h2{
     font-size: 1.2rem;
+    margin-top: 36px;
   }
   .content h5{
     font-size: 0.7rem;
