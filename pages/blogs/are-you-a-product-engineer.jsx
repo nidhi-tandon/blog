@@ -1,6 +1,6 @@
-import Navbar from "../../../components/Navbar";
-import styles from "../../../styles/Blog.module.css";
-import AreYouAProductEngineerMdx from "./are-you-a-product-engineer.mdx";
+import Navbar from "../../components/Navbar";
+import styles from "../../styles/Blog.module.css";
+import AreYouAProductEngineerMdx from "../../mdx/are-you-a-product-engineer.mdx";
 
 const AreYouAProductEngineer = () => {
   return (
