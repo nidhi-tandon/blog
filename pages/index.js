@@ -49,6 +49,7 @@ const IconContainer = styled.div`
 
 const SocialLink = styled(Link)`
   margin: 12px;
+
   svg {
     height: 24px;
     width: 24px;
@@ -62,6 +63,10 @@ export default function Home() {
         <title>Nidhi Tandon</title>
         <meta name="description" content="Nidhi's blog" />
         <link rel="icon" href="/favicon.ico" />
+        {/*<link*/}
+        {/*  rel="stylesheet"*/}
+        {/*  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"*/}
+        {/*/>*/}
       </Head>
       <Navbar />
 
@@ -76,7 +81,7 @@ export default function Home() {
         <Description>
           <div>Health enthusiast and wellness vocalist</div>
           <div>Sometimes play guitar</div>
-          <div>Love reading books </div>
+          <div>Love reading books</div>
           <br />
           <div>Frontend Engineer by profession</div>
         </Description>

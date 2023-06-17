@@ -105,8 +105,10 @@
   margin: 0;
 }
 
-.horizontalLine{
-  width: 100%;
+@media only screen and (max-width: 992px) {
+  .content {
+    max-width: 100%;
+  }
 }
 
 @media only screen and (max-width: 790px) {
@@ -117,10 +119,6 @@
 }
 
 @media only screen and (max-width: 460px) {
-  .horizontalLine{
-    width: 100%;
-  }
-
   .content {
     max-width: 100%;
     font-size: 14px;

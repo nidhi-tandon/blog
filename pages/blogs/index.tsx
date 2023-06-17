@@ -1,7 +1,5 @@
 import Navbar from "../../components/Navbar";
-import styles from "../../styles/Blog.module.css";
 import Link from "next/link";
-import HorizontalLine from "../../components/HorizontalLine";
 import styled from "@emotion/styled";
 
 const Spacing = styled.div`
@@ -26,6 +24,12 @@ const Subtext = styled.p`
   color: #d1d1d1;
 `;
 
+const HorizontalLine = styled.div`
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 1px;
+  width: 100%;
+`;
+
 const Blogs = () => {
   return (
     <>
@@ -41,10 +45,21 @@ const Blogs = () => {
               </Subtext>
             </>
           </Link>
-          <HorizontalLine className={styles.horizontalLine} />
+          <HorizontalLine />
 
           <Spacing>
-            <p>More coming soon! Stay tuned :)</p>
+            <Link href="/blogs/promise-chaining">
+              <>
+                <h2>Promise Chaining</h2>
+                <Subtext>
+                  Heck! How can I solve this?
+                  <div>
+                    <code>sequence([asyncFn1, asyncFn2, asyncFn3])</code>
+                  </div>
+                </Subtext>
+              </>
+            </Link>
+            <HorizontalLine />
           </Spacing>
         </LinkContainer>
       </Layout>
