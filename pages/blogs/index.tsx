@@ -36,26 +36,26 @@ const Blogs = () => {
       <Navbar />
       <Layout>
         <LinkContainer>
-          <Link href="/blogs/are-you-a-product-engineer">
+          <Link href="/blogs/promise-chaining">
             <>
-              <h2>Are you a Product Engineer?</h2>
+              <h2>Promise Chaining</h2>
               <Subtext>
-                Find in-depth about what to expect when joining the role of a
-                Product Engineer in Frontend domain
+                Heck! How can I solve this?
+                <div>
+                  <code>sequence([asyncFn1, asyncFn2, asyncFn3])</code>
+                </div>
               </Subtext>
             </>
           </Link>
           <HorizontalLine />
 
           <Spacing>
-            <Link href="/blogs/promise-chaining">
+            <Link href="/blogs/are-you-a-product-engineer">
               <>
-                <h2>Promise Chaining</h2>
+                <h2>Are you a Product Engineer?</h2>
                 <Subtext>
-                  Heck! How can I solve this?
-                  <div>
-                    <code>sequence([asyncFn1, asyncFn2, asyncFn3])</code>
-                  </div>
+                  Find in-depth about what to expect when joining the role of a
+                  Product Engineer in Frontend domain
                 </Subtext>
               </>
             </Link>
