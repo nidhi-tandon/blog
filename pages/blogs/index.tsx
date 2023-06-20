@@ -24,6 +24,12 @@ const Subtext = styled.p`
   color: #d1d1d1;
 `;
 
+const Date = styled.div`
+  font-size: 14px;
+  color: #9c9c9c;
+  margin-bottom: 8px;
+`;
+
 const HorizontalLine = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   height: 1px;
@@ -45,6 +51,7 @@ const Blogs = () => {
                   <code>sequence([asyncFn1, asyncFn2, asyncFn3])</code>
                 </div>
               </Subtext>
+              <Date>June 2023</Date>
             </>
           </Link>
           <HorizontalLine />
@@ -57,6 +64,7 @@ const Blogs = () => {
                   Find in-depth about what to expect when joining the role of a
                   Product Engineer in Frontend domain
                 </Subtext>
+                <Date>September 2022</Date>
               </>
             </Link>
             <HorizontalLine />
