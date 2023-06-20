@@ -61,6 +61,7 @@ const Blogs = () => {
             </Link>
             <HorizontalLine />
           </Spacing>
+          <Spacing>More coming soon! Stay tuned ✏️</Spacing>
         </LinkContainer>
       </Layout>
     </>
