@@ -3,6 +3,7 @@ import styles from "../../styles/Blog.module.css";
 import Link from "next/link";
 import HorizontalLine from "../../components/HorizontalLine";
 import styled from "@emotion/styled";
+import { ReactElement } from "react";
 
 const Spacing = styled.div`
   margin-top: 48px;
@@ -26,7 +27,7 @@ const Subtext = styled.p`
   color: #d1d1d1;
 `;
 
-const Blogs = () => {
+const Blogs = (): ReactElement => {
   return (
     <>
       <Navbar />
