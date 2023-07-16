@@ -222,28 +222,38 @@ Now, let's convert all the functions to promisified functions
 <br/>
 Now, we need to iterate over `promisifiedFuncs` and pass the resolved data to the next function.
 
+<br/>
+
 <CodeBlock code={
     `
-    promisifiedFuncs.forEach((promiseFunc) => {
+    for (const promiseFunc of promisifiedFuncs) {
         // do something with the data of promiseFunc here
-    })
+    }
 `
 }/>
 
 <br/>
 
-However, we require some initial data `defaultData` (check above) to start with, which will be passed to `asyncCallbackFn1`. In the first iteration, this initial data will be provided to `promiseFunc`
+Side note:
+
+When dealing with `Promises`, the `for...of` loop is particularly useful because it allows you to work with asynchronous operations in a more synchronous-like manner.
+This is especially handy when you need to execute Promises sequentially or handle dependencies between asynchronous tasks.
+
+Check the bonus section for more details.
+
+<br/>
+
+However, during iteration we require some initial data `defaultData` (check above) to start with, which will be passed to `asyncCallbackFn1`. In the first iteration, this initial data will be provided to `promiseFunc`
 Hmm… 🤔
 
 <CodeBlock code={
     `
-    promisifiedFuncs.forEach((promiseFunc) => {
-
+    for (const promiseFunc of promisifiedFuncs) {
         // pass the initial data to promiseFunc
         const result = promiseFunc(data);
 
         // pass the result to next promiseFunc
-    })
+    }
 `
 }/>
 
@@ -280,9 +290,9 @@ So let's create an initial Promise that resolves with the data `initialData`, an
     // renaming result to promise to keep the context intact with the variable
     let promise = Promise.resolve(initialData);
 
-    promisifiedFuncs.forEach((promiseFunc) => {
+    for (const promiseFunc of promisifiedFuncs) {
         promise = promise.then((data) => promiseFunc(data));
-    })
+    }
 `
 }/>
 
@@ -313,9 +323,9 @@ So let's put all the steps together
             let promise = Promise.resolve(initialData);
 
             // Chain all promisifiedFuncs together in sequence
-            promisifiedFuncs.forEach((promiseFunc) => {
+            for (const promiseFunc of promisifiedFuncs) {
                 promise = promise.then((data) => promiseFunc(data));
-            })
+            }
 
             // Resolve the final promise and invoke the callback with the result
             promise.then((data) => {
