@@ -51,7 +51,7 @@ const Blogs = () => {
                   <code>sequence([asyncFn1, asyncFn2, asyncFn3])</code>
                 </div>
               </Subtext>
-              <Date>June 2023</Date>
+              <Date>July 2023</Date>
             </>
           </Link>
           <HorizontalLine />
