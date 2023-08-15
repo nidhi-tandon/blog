@@ -2,14 +2,23 @@ import React, { ReactElement } from "react";
 import Navbar from "../components/Navbar";
 import styles from "../styles/Blog.module.css";
 import NowMdx from "../mdx/now.mdx";
+import styled from "@emotion/styled";
 
+const Layout = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 const Now = (): ReactElement => {
   return (
     <>
       <Navbar />
-      <div className={styles.content}>
-        <NowMdx />
-      </div>
+      <Layout>
+        <div className={styles.content}>
+          <NowMdx />
+        </div>
+      </Layout>
     </>
   );
 };
