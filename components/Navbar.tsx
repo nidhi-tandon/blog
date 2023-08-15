@@ -16,6 +16,7 @@ const Navbar = (): JSX.Element => {
     <Container>
       <NavigationLinks href="/blogs">Blogs</NavigationLinks>
       <NavigationLinks href="/">About</NavigationLinks>
+      <NavigationLinks href="/now">Now</NavigationLinks>
     </Container>
   );
 };
