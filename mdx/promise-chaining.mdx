@@ -46,7 +46,7 @@ Something like:
 `
 }/>
 
-It accepts an array of `AsyncCallbackFn` and chains them up by passing resulting data to the next `AsyncCallbackFn` via the `Callback`.
+`sequence()` accepts an array of `AsyncCallbackFn` and chains them up by passing resulting data to the next `AsyncCallbackFn`. Chains up means call one function and pass the result to the next function and so on. Just like a chain-reaction.
 
 <br/>
 Let's dig into it 🔍
@@ -65,7 +65,9 @@ Let's break down the problem statement. We know that `sequence()` accepts an arr
 }/>
 
 <br/>
-Since the parameters of `sequence()` are an array of functions, we would iterate through them.
+So the next step would be to write what's happening inside the returned function. That's the heart of the entire question.
+
+Since the parameter of `sequence()` is an array of functions, to get the result, we would iterate through them.
 
 <CodeBlock code={
     `
@@ -82,23 +84,22 @@ Since the parameters of `sequence()` are an array of functions, we would iterate
 
 <br/>
 
-The tricky part is that we need to chain the functions, which means the result of `funcs[0]` (representing `asyncCallbackFn1`) would be passed to `funcs[1]` (representing `asyncCallbackFn2`) and so on.
-
-And if there is an error, we would return the error immediately and terminate the loop.
+We know that the result of the first function `funcs[0]` (representing `asyncCallbackFn1`) would be passed to `funcs[1]` (representing `asyncCallbackFn2`) and so on.
+And if there is an error at any step, we can terminate the loop and return the error.
 
 <CodeBlock code={
     `
    let index = 0;
    // some loop
 
-   funcs[index]((error, data) => { // the callback function
+   funcs[index]((error, data) => { // expanding the callback function
         if (error) {
             // if error, return null as data
             callback(error, null);
         }
         else {
             // call the next funcs and pass data
-            // funcs[nextIndex](data);
+            // funcs[nextIndex](data); // data is the result of funcs[0]
             // This is recursion here
         }
    },
@@ -109,7 +110,9 @@ And if there is an error, we would return the error immediately and terminate th
 
 <br/>
 
-So why not wrap this entire functionality inside a function called `nextCallback()` that will handle the task of taking the data and passing it to the next function. Therefore, it's a typical example of recursion
+As we can see it's a case of recursion, so let's simplify.
+
+Wrapping the entire functionality inside `nextCallback()` function that will handle the task of taking the data and passing it to the next function.
 
 <CodeBlock code={
     `
@@ -126,7 +129,7 @@ So why not wrap this entire functionality inside a function called `nextCallback
 
 <br/>
 
-So let's put all the steps together for the final solution
+So let's write up `nextCallback` logic and put the solution together
 
 <CodeBlock code={
     `
