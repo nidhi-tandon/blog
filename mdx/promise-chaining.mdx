@@ -1,0 +1,529 @@
+import styles from "../styles/Blog.module.css";
+import CodeBlock from "../components/CodeBlock";
+
+# Promise Chaining
+<br/>
+
+Let's consider three functions `asyncCallbackFn1`, `asyncCallbackFn2`, and `asyncCallbackFn3`.
+
+<CodeBlock code={
+    `
+    // Function definition
+
+    type Callback = (error: Error | null, data: any) => void;
+    type AsyncCallbackFn = (callback: Callback, data: any) => void;
+
+    const asyncCallbackFn1: AsyncCallbackFn = (callback, num) => {
+        setTimeout(() => callback(null, num * 2), 100)
+    };
+
+    const asyncCallbackFn2: AsyncCallbackFn = (callback, num) => {
+        setTimeout(() => callback(null, num * 3), 100)
+    };
+
+    const asyncCallbackFn3: AsyncCallbackFn = (callback, num) => {
+        setTimeout(() => callback(null, num * 7), 100)
+    };
+`
+}/>
+
+<br/>
+We have to create a function called `sequence()` which chains up these async callback functions in sequential manner.
+
+Something like:
+
+<CodeBlock code={
+    `
+    const sequence = (funcs: AsyncCallbackFn[]): AsyncCallbackFn => {
+        // Your code here
+    }
+
+    const result = sequence([asyncCallbackFn1, asyncCallbackFn2, asyncCallbackFn3]);
+
+    result((error, data) => {
+        console.log(data) // here data is the answer : 42
+    }, 1)
+`
+}/>
+
+`sequence()` accepts an array of `AsyncCallbackFn` and chains them up by passing resulting data to the next `AsyncCallbackFn`. Chains up means call one function and pass the result to the next function and so on. Just like a chain-reaction.
+
+<br/>
+Let's dig into it 🔍
+
+Let's break down the problem statement. We know that `sequence()` accepts an array of functions and returns a function of type `AsyncCallbackFn`.
+
+<CodeBlock code={
+    `
+     const sequence = (funcs: AsyncCallbackFn[]): AsyncCallbackFn => {
+        // Let's first return a function of type AsyncCallbackFn
+        return function(callback, data){
+            // Your code here
+        }
+    }
+`
+}/>
+
+<br/>
+So the next step would be to write what's happening inside the returned function. That's the heart of the entire question.
+
+Since the parameter of `sequence()` is an array of functions, to get the result, we would iterate through them.
+
+<CodeBlock code={
+    `
+     const sequence = (funcs: AsyncCallbackFn[]): AsyncCallbackFn => {
+         return function(callback, data){
+            let index = 0;
+            // some loop
+            funcs[index](callback, data);
+            index++;
+         }
+     }
+`
+}/>
+
+<br/>
+
+We know that the result of the first function `funcs[0]` (representing `asyncCallbackFn1`) would be passed to `funcs[1]` (representing `asyncCallbackFn2`) and so on.
+And if there is an error at any step, we can terminate the loop and return the error.
+
+<CodeBlock code={
+    `
+   let index = 0;
+   // some loop
+
+   funcs[index]((error, data) => { // expanding the callback function
+        if (error) {
+            // if error, return null as data
+            callback(error, null);
+        }
+        else {
+            // call the next funcs and pass data
+            // funcs[nextIndex](data); // data is the result of funcs[0]
+            // This is recursion here
+        }
+   },
+   data); // initial data
+   index++;
+`
+}/>
+
+<br/>
+
+As we can see it's a case of recursion, so let's simplify.
+
+Wrapping the entire functionality inside `nextCallback()` function that will handle the task of taking the data and passing it to the next function.
+
+<CodeBlock code={
+    `
+   let index = 0;
+   const nextCallback = (data: number) => {
+       // do something
+       // call nextCallback(with_some_data) again
+       index++;
+   };
+
+   nextCallback(initialData)
+`
+}/>
+
+<br/>
+
+So let's write up `nextCallback` logic and put the solution together
+
+<CodeBlock code={
+    `
+    const sequence = (funcs: AsyncFunc[]): AsyncFunc => {
+        return function(callback, initialData){
+            let index = 0;
+
+            // a recursive function
+            const nextCallback = (data: number) => {
+
+                // break condition:
+                // once reached the end of the loop, return callback with data
+                if (index === funcs.length) {
+                    callback(null, data);
+                    return;
+                }
+
+                // loop over funcs and on success call nextCallback with the data
+                funcs[index]((error, data) => {
+                    if (error) {
+                        // break condition
+                        callback(error, null);
+                    } else {
+                        nextCallback(data);
+                    }
+                }, data);
+
+                // increment counter
+                index++;
+            };
+
+            nextCallback(initialData)
+        }
+    }
+`
+}/>
+
+<br/>
+
+Now, let's solve this using `Promises`.
+
+Since the functions don't return Promises, let's modify them to return a `Promise` first.
+
+This `promisify` function will return a function that, in turn, returns a Promise.
+
+<CodeBlock code={
+    `
+     // Create a promisify function that takes an AsyncCallbackFn
+     const promisify = (fn: AsyncCallbackFn): Function => {
+
+            // Return a function that accepts defaultData and returns a Promise
+            return function (defaultData: number): Promise {
+                return new Promise((resolve, reject) => {
+
+                    // Call the original function (fn) with a callback
+                    fn((error, data) => {
+                        if (error) {
+                            reject(error); // Reject the Promise if an error occurs
+                        } else {
+                            resolve(data); // Resolve the Promise with the data
+                        }
+                    }, defaultData);
+                })
+            }
+         }
+`
+}/>
+
+<br/>
+
+Now, let's convert all the functions to promisified functions
+
+<CodeBlock code={` const promisifiedFuncs = funcs.map((fn) => promisify(fn)); `}/>
+
+<br/>
+Now, we need to iterate over `promisifiedFuncs` and pass the resolved data to the next function.
+
+<br/>
+
+<CodeBlock code={
+    `
+    for (const promiseFunc of promisifiedFuncs) {
+        // do something with the data of promiseFunc here
+    }
+`
+}/>
+
+<br/>
+
+Side note:
+
+When dealing with `Promises`, the `for...of` loop is particularly useful because it allows you to work with asynchronous operations in a more synchronous-like manner.
+This is especially handy when you need to execute Promises sequentially or handle dependencies between asynchronous tasks.
+
+Check the bonus section for more details.
+
+<br/>
+
+However, during iteration we require some initial data `defaultData` (check above) to start with, which will be passed to `asyncCallbackFn1`. In the first iteration, this initial data will be provided to `promiseFunc`
+Hmm… 🤔
+
+<CodeBlock code={
+    `
+    for (const promiseFunc of promisifiedFuncs) {
+        // pass the initial data to promiseFunc
+        const result = promiseFunc(data);
+
+        // pass the result to next promiseFunc
+    }
+`
+}/>
+
+<br/>
+Where will we get the initial data from and what format should it be in? 🤔
+
+Understand few things first:
+- We have a `promiseFunc` that returns a `Promise`.
+- We want to pass the resolved data from `promiseFunc` to the next `promiseFunc`, something like
+    <CodeBlock code={`const result = promiseFunc(data).then(data => /* pass the data to the next Promise */)`}/>
+-  The `result` is a `Promise`.
+
+Now, let's think about how you would accomplish this in a regular loop without using promises, where you need to pass data to the next function. In such a scenario,  you might typically do something like this:
+<CodeBlock code={
+    `
+    // some_Func() returns a numeric value;
+    let result = initialNumericValue; // 0
+
+    for(let i=0; i<5; i++){
+        result = result + some_Func(i);
+    }
+`
+}/>
+
+Now keep this concept in mind and let's use the same in case of Promises.
+
+Assign an initial value to result, which will be a resolved Promise.
+
+So let's create an initial Promise that resolves with the data `initialData`, and then chain that `Promise` with `promiseFunc`. Although it may not be a straightforward approach, so isn't the world!
+
+<CodeBlock code={
+    `
+    // Create an initial Promise with the resolved data (initialData)
+    // renaming result to promise to keep the context intact with the variable
+    let promise = Promise.resolve(initialData);
+
+    for (const promiseFunc of promisifiedFuncs) {
+        // Create a chain of promises to be executed later
+        promise = promise.then((data) => promiseFunc(data));
+    }
+`
+}/>
+
+<br/>
+
+Now, let's consume the data or handle the error from the Promise
+
+<CodeBlock code={
+    `
+    // Execute the chain of promises
+    promise.then((data) => {
+        callback(null, data);
+    }).catch((error) => {
+        callback(error, null);
+    })
+`
+}/>
+<br/>
+
+So let's put all the steps together
+
+<CodeBlock code={
+    `
+    const sequence = (funcs: AsyncFunc[]): AsyncFunc => {
+        return function (callback, initialData) {
+            // Promisify each function in the array
+            const promisifiedFuncs = funcs.map((fn) => promisify(fn));
+
+            // Initialize the promise with the initialData
+            let promise = Promise.resolve(initialData);
+
+            // Chain all promisifiedFuncs together in sequence
+            for (const promiseFunc of promisifiedFuncs) {
+                promise = promise.then((data) => promiseFunc(data));
+            }
+
+            // Resolve the final promise and invoke the callback with the result
+            promise.then((data) => {
+                callback(null, data);
+            }).catch((error) => {
+                callback(error, null);
+            })
+        }
+    }
+`
+}/>
+
+Annnd we are done!! 🎉
+
+<br/>
+### Bonus 🚀
+
+The same can be solved with `async/await`
+
+For solving such an iterative problem with async/await, we can use for of loop with await
+
+Let's start with a simple example:
+
+<CodeBlock code={
+    `
+    // Async functions representing items
+    const func1 = async () => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve('Yayy!');
+            }, 1000);
+        });
+    };
+
+    const func2 = async () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('Oops!');
+            }, 2000);
+        });
+   };
+
+   const funcs = [func1, func2];
+   solve(funcs);
+`
+} />
+
+If we need to iterate over these items, we can use a `for...of` loop
+
+<CodeBlock code={
+    `
+    async function solve(funcs) {
+        for (const fn of funcs) {
+            try {
+                const result = await fn();
+                // Do something with result
+            } catch (error) {
+                // Do something with error
+            }
+        }
+    }
+`
+} />
+
+In simpler terms:
+
+The `for...of` loop with `await` helps you handle a list of tasks one at a time, waiting for each task to finish before moving on to the next.
+
+<br/>
+Now we can apply the same knowledge to solve our original question.
+
+<CodeBlock code={
+    `
+     const sequence = (funcs: AsyncCallbackFn[]): AsyncCallbackFn => {
+        return async function(callback, initialData) {
+
+            // Promisify each function in the array
+            const promisifiedFns = funcs.map((fn) => promisify(fn));
+
+            try {
+                // Iterate over the promisified functions sequentially
+                for (const promiseFn of promisifiedFns) {
+                    // Await the result of each function and update the initialData
+                    initialData = await promiseFn(initialData);
+                }
+
+                // Invoke the callback with the final result
+                callback(null, initialData);
+            } catch (error: any) {
+                 // If an error occurs, invoke the callback with the error
+                callback(error, null);
+            }
+        }
+     }
+`
+}/>
+
+<br/>
+Let's try with `reduce` and `async/await`
+
+Let's use the same example as above to understand how `reduce` works with async functions.
+
+<CodeBlock code={
+    `
+    async function solve(funcs) {
+        try{
+            const promise = Promise.resolve(undefined);
+
+            // Execute the async functions sequentially using reduce
+            const result = await funcs.reduce((previousPromise, currentFunc) => {
+                // Wait for the previous promise to resolve and store the result
+                const previousResult = await previousPromise;
+
+                // Execute the current function and get its result
+                return currentFunc().then((currentResult) => [previousResult, currentResult]);
+            }, promise);
+
+            console.log('Result:', result);
+
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+`
+} />
+
+<br/>
+<br/>
+
+Now we can apply the same knowledge here
+
+<CodeBlock code={
+    `
+     const sequence = (funcs: AsyncCallbackFn[]): AsyncCallbackFn => {
+        return function(callback, initialData) {
+             // Promisify each function in the array
+            const promisifiedFns = funcs.map((fn) => promisify(fn));
+
+            // Initialize the promise with the initialData
+            const initPromise = Promise.resolve(initialData);
+
+            // Chain the promises together to execute them sequentially
+            const chainedPromise = promisifiedFns.reduce(async (accumulatorPromise, currentPromise) => {
+                // Wait for the previous promise to resolve and get its value
+                const value = await accumulatorPromise;
+
+                // Execute the current promise with the value and return the result
+                return await currentPromise(value);
+            }, initPromise);
+
+            // Handle the final result or error of the chained promises
+            chainedPromise.then((data) => {
+                callback(null, data);
+            }).catch((error) => {
+                callback(error, undefined);
+            })
+        }
+     }
+`
+}/>
+
+<br/>
+Let's try with `reduce` and `Promises`
+
+<CodeBlock code={
+    `
+     const sequence = (funcs: AsyncCallbackFn[]): AsyncCallbackFn => {
+        return function(callback, initialData) {
+
+            // Promisify each function in the array
+            const promisifiedFns = funcs.map((fn) => promisify(fn));
+
+            // Initialize the promise with the initialData
+            const initPromise = Promise.resolve(initialData);
+
+           // Chain the promises together to execute them sequentially
+           const chainedPromises = promisifiedFns.reduce<Promise<number>>((accumulatorPromise, currentPromise) => {
+                // Wait for the accumulatorPromise to resolve and pass the result to the currentPromise
+                return accumulatorPromise.then((data) => currentPromise(data));
+           }, initPromise);
+
+           // Handle the final result or error of the chained promises
+           chainedPromises.then((data) => {
+                callback(null, data);
+           }).catch((error) => {
+                callback(error, undefined);
+           })
+        }
+     }
+`
+}/>
+
+<br/>
+<div>
+    Tadaa! 🎊
+
+</div>
+<div className={styles.linkSection}>
+    Todo: Solve it with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator" target="_blank">Generators</a>
+
+    Useful Links:
+    - The above problem statement is using the concept of <a href="https://whatthefuck.is/composition"
+                                                             target="_blank">Composition </a>
+    - <a href="https://bigfrontend.dev/problem/implement-async-helper-sequence" target="_blank">Link</a> to the original
+    question
+    - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+                 target="_blank">Promises </a>
+    - <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function" target="_blank">Callback
+    functions</a>
+    - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of" target="_blank">for await... of</a>
+    - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank">reduce</a>
+    - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator" target="_blank">Generators</a>
+</div>

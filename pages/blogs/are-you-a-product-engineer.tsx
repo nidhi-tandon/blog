@@ -1,26 +1,12 @@
-import Navbar from "../../components/Navbar";
-import styles from "../../styles/Blog.module.css";
 import AreYouAProductEngineerMdx from "../../mdx/are-you-a-product-engineer.mdx";
 import React from "react";
-import styled from "@emotion/styled";
-
-const Layout = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
+import BlogBase from "../../components/BlogBase";
 
 const AreYouAProductEngineer = () => {
   return (
-    <>
-      <Navbar />
-      <Layout>
-        <div className={styles.content}>
-          <AreYouAProductEngineerMdx />
-        </div>
-      </Layout>
-    </>
+    <BlogBase>
+      <AreYouAProductEngineerMdx />
+    </BlogBase>
   );
 };
 
