@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar";
-import styles from "../../styles/Blog.module.css";
+import styles from "../../styles/blog.module.css";
 import Link from "next/link";
 import HorizontalLine from "../../components/HorizontalLine";
 import styled from "@emotion/styled";

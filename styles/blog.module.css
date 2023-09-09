@@ -1,0 +1,176 @@
+.content {
+  max-width: 800px;
+  margin-top: 48px;
+  margin-bottom: 32px;
+  line-height: 24px;
+  font-size: 17px;
+}
+
+.content a {
+  color: rgb(148 163 184);
+  text-decoration: underline;
+}
+
+.content h1, .content h2{
+  color: #f7f7f7;
+}
+.content h4 {
+  color: #a2b5bb;
+}
+
+.content h5 {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.content code {
+  color: #7fb7dd
+}
+
+.content strong {
+  color: #a4daff;
+}
+
+.content blockquote {
+  padding-left: 24px;
+  margin: 0;
+  font-size: 16px;
+}
+
+.content blockquote p {
+  padding: 12px 0;
+  margin: 0;
+}
+
+.content blockquote ul {
+  padding: 0 12px 8px 0;
+  margin: 0 24px;
+}
+
+.content li {
+  padding: 8px;
+}
+
+
+.mdxImage {
+  border-radius: 4px;
+  margin: 24px auto 0 auto;
+  display: block;
+  max-width: 80%;
+}
+
+.summary {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.bonus {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  background-color: rgb(30,41, 59);
+  padding: 24px;
+  border-radius: 8px;
+  color: rgb(148, 163, 184);
+  border: 0 solid #e5e7eb
+}
+
+.endNote {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.linkSection {
+  margin-top: 24px;
+  font-size: 15px;
+}
+
+.linkSection ul{
+  margin-top: 0;
+}
+
+.linkSection li {
+  padding: 4px;
+}
+
+.nestedUl li {
+  padding: 8px;
+}
+
+.nestedUl p {
+  padding: 0;
+  margin: 0;
+}
+
+.horizontalLine{
+  width: 100%;
+}
+
+@media only screen and (max-width: 790px) {
+  .content h1 {
+    font-size: 1.5rem;
+    line-height: 30px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .horizontalLine{
+    width: 100%;
+  }
+
+  .content {
+    max-width: 100%;
+    font-size: 14px;
+    margin-top: 0;
+    line-height: 22px;
+  }
+  .content h1 {
+    font-size: 1.5rem;
+    line-height: 30px;
+  }
+  .content h2{
+    font-size: 1.2rem;
+    margin-top: 46px;
+  }
+  .content h5{
+    font-size: 0.7rem;
+    margin-top: 4px;
+  }
+  .content ul{
+    padding: 0 16px;
+    margin: 0;
+  }
+  .content li{
+    padding: 4px;
+  }
+  .content blockquote{
+    font-size: 14px;
+  }
+  .summary{
+    padding: 0;
+  }
+  .mdxImage{
+    max-width: 100% !important;
+    margin-top: 12px;
+    height: auto !important;
+  }
+  .bonus{
+    padding: 12px;
+  }
+  .bonus blockquote ul {
+    margin: 0 12px;
+  }
+  .bonus blockquote li{
+    padding: 8px 0;
+  }
+  .endNote{
+    padding: 0;
+    margin: 0 0 64px 0;
+  }
+  .linkSection{
+    font-size: 13px;
+  }
+}
