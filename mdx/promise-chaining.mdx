@@ -276,11 +276,7 @@ So let's create an initial Promise that resolves with the data `initialData`, an
     let promise = Promise.resolve(initialData);
 
     for (const promiseFunc of promisifiedFuncs) {
-        // It's very interesting how this line works inside a for of loop
-        // For this, you need to know Event loop and Micro task queue
-
-        // In short, all the promises are chained in "promise" and
-        // are executed together at the end
+        // Create a chain of promises to be executed later
         promise = promise.then((data) => promiseFunc(data));
     }
 `
@@ -292,6 +288,7 @@ Now, let's consume the data or handle the error from the Promise
 
 <CodeBlock code={
     `
+    // Execute the chain of promises
     promise.then((data) => {
         callback(null, data);
     }).catch((error) => {
