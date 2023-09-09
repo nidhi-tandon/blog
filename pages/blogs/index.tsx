@@ -1,6 +1,7 @@
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import styled from "@emotion/styled";
+import { ReactElement } from "react";
 
 const Spacing = styled.div`
   margin-top: 48px;
@@ -36,7 +37,7 @@ const HorizontalLine = styled.div`
   width: 100%;
 `;
 
-const Blogs = () => {
+const Blogs = (): ReactElement => {
   return (
     <>
       <Navbar />
