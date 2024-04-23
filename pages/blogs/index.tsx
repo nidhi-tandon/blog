@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { ReactElement } from "react";
+import Tag from "../../components/Tag";
 
 const Spacing = styled.div`
   margin-top: 48px;
@@ -52,6 +53,7 @@ const Blogs = (): ReactElement => {
                   <code>sequence([asyncFn1, asyncFn2, asyncFn3])</code>
                 </div>
               </Subtext>
+              <Tag text="#tech" type="tech"/>
               <Date>September 2023</Date>
             </>
           </Link>
@@ -65,6 +67,7 @@ const Blogs = (): ReactElement => {
                   Find in-depth about what to expect when joining the role of a
                   Product Engineer in Frontend domain
                 </Subtext>
+                <Tag text="#tech" type="tech"/>
                 <Date>September 2022</Date>
               </>
             </Link>
