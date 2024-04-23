@@ -44,6 +44,20 @@ const Blogs = (): ReactElement => {
       <Navbar />
       <Layout>
         <LinkContainer>
+            <Link href="/blogs/living-cylically">
+              <>
+                <h2>How to live cyclically?</h2>
+                {/*<Subtext>*/}
+                {/*  Find in-depth about what to expect when joining the role of a*/}
+                {/*  Product Engineer in Frontend domain*/}
+                {/*</Subtext>*/}
+                <Tag text="#life" type="life"/>
+                <Date>April 2024</Date>
+              </>
+            </Link>
+            <HorizontalLine />
+
+        <Spacing>
           <Link href="/blogs/promise-chaining">
             <>
               <h2>Promise Chaining</h2>
@@ -57,6 +71,7 @@ const Blogs = (): ReactElement => {
               <Date>September 2023</Date>
             </>
           </Link>
+        </Spacing>
           <HorizontalLine />
 
           <Spacing>
@@ -73,6 +88,7 @@ const Blogs = (): ReactElement => {
             </Link>
             <HorizontalLine />
           </Spacing>
+
           <Spacing>More coming soon! Stay tuned ✏️</Spacing>
         </LinkContainer>
       </Layout>
