@@ -1,6 +1,5 @@
 import {ReactElement} from "react";
 import styled from "@emotion/styled";
-import Link from "next/link";
 
 export const TagTypes = {
     tech: 'tech',
@@ -9,7 +8,7 @@ export const TagTypes = {
 
 const TagColors = {
     tech: '#8E7AB5',
-    life: '#88AB8E'
+    life: '#739072'
 }
 
 interface TagsProps {
@@ -18,11 +17,11 @@ interface TagsProps {
 }
 
 const Container = styled.div`
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 2px 8px;
   width: fit-content;
   margin-bottom: 12px;
-  color: #272222;
+  color: #e4dfdf;
   font-size: 14px;
 `
 const Tag = ({text, type}: TagsProps): ReactElement => {
